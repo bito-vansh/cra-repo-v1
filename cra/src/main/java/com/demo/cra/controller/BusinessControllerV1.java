@@ -2,10 +2,9 @@ package com.demo.cra.controller;
 
 import com.demo.cra.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * This class represents a REST controller for business-related operations.
@@ -42,6 +41,26 @@ public class BusinessControllerV1 {
 
         return businessService.isNumberPrime(n);
 
+
+    }
+
+    /**
+     * Endpoint to check for duplicates in a list of integers.
+     * Accepts a list of integers in the request body and returns a string
+     * indicating whether duplicates were found or not.
+     */
+    @GetMapping(value = "/check/duplicate")
+    public String checkDuplicate(
+            @RequestBody List<Integer> numsList
+    ) {
+
+        boolean containsDuplicate = businessService.doesListContainDuplicates(numsList);
+
+        if (containsDuplicate) {
+            return "Duplicates found";
+        } else {
+            return "No duplicates found";
+        }
 
     }
 

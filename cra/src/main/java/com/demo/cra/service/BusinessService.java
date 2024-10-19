@@ -1,6 +1,9 @@
 package com.demo.cra.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * This class provides business logic services.
@@ -44,6 +47,48 @@ public class BusinessService {
         }
 
         return result;
+
+    }
+
+    /**
+     * Checks if a list of integers contains any duplicate values.
+     * This method ignores null elements in the list and returns false for empty or null lists.
+     * @param numsList The list of integers to check for duplicates
+     * @return true if duplicates are found, false otherwise
+     */
+    public boolean doesListContainDuplicates(
+            List<Integer> numsList
+    ) {
+
+        if (CollectionUtils.isEmpty(numsList)) {
+            return false;
+        }
+
+        for (int i = 0; i < numsList.size(); i++) {
+
+            Integer n1 = numsList.get(i);
+
+            if (n1 == null) {
+                continue;
+            }
+
+            for (int j = i + 1; j < numsList.size(); j++) {
+
+                Integer n2 = numsList.get(j);
+
+                if (n2 == null) {
+                    continue;
+                }
+
+                if (n1.equals(n2)) {
+                    return true;
+                }
+
+            }
+
+        }
+
+        return false;
 
     }
 
