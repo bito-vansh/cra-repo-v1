@@ -1,0 +1,67 @@
+package com.demo.cra.controller;
+
+import com.demo.cra.service.BusinessService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * This class represents a REST controller for business-related operations.
+ *
+ * @author Vansh
+ */
+@RestController
+@RequestMapping(value = "/business/v1")
+public class BusinessControllerV1 {
+
+    @Autowired
+    private BusinessService businessService;
+
+    /**
+     * Endpoint for health check.
+     * Returns "OK" to indicate the service is running.
+     */
+    @GetMapping("/health/check")
+    public String healthCheck() {
+
+        return "OK";
+
+    }
+
+    /**
+     * Endpoint to check if a given number is prime.
+     * This method handles GET requests to "/check/prime" and expects a query parameter "n".
+     * It delegates the prime number check to the businessService.
+     */
+    @GetMapping("/check/prime")
+    public String checkPrime(
+            @RequestParam(name = "n") Integer n
+    ) {
+
+        return businessService.isNumberPrime(n);
+
+
+    }
+
+    /**
+     * Endpoint to check for duplicates in a list of integers.
+     * Accepts a list of integers in the request body and returns a string
+     * indicating whether duplicates were found or not.
+     */
+    @GetMapping(value = "/check/duplicate")
+    public String checkDuplicate(
+            @RequestBody List<Integer> numsList
+    ) {
+
+        boolean containsDuplicate = businessService.doesListContainDuplicates(numsList);
+
+        if (containsDuplicate) {
+            return "Duplicates found";
+        } else {
+            return "No duplicates found";
+        }
+
+    }
+
+}
