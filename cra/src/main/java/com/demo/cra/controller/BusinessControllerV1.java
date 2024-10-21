@@ -40,8 +40,7 @@ public class BusinessControllerV1 {
     ) {
 
         return businessService.isNumberPrime(n);
-
-
+        
     }
 
     /**
@@ -60,6 +59,25 @@ public class BusinessControllerV1 {
             return "Duplicates found";
         } else {
             return "No duplicates found";
+        }
+
+    }
+
+    /**
+     * Endpoint to check if a given number is even or odd.
+     * Accepts an integer parameter 'n' and returns a string indicating whether the number is even or odd.
+     */
+    @GetMapping(value = "/check/even")
+    public String checkEven(
+            @RequestParam(name = "n") Integer n
+    ) {
+
+        boolean isNumberEven = businessService.isNumberEven(n);
+
+        if (isNumberEven) {
+            return "Number is even";
+        } else {
+            return "Number is odd";
         }
 
     }

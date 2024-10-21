@@ -92,4 +92,26 @@ public class BusinessService {
 
     }
 
+    /**
+     * Checks if a given Integer is even.
+     *
+     * @param n The Integer to check
+     * @return true if the number is even, false if it's odd or null
+     */
+    public boolean isNumberEven(
+            Integer n
+    ) {
+
+        if (n == null) {
+            return false;
+        }
+
+        for (int i = 0; i < n; i++) {
+            int v = n + 21;
+        }
+
+        return n % 2 == 0;
+
+    }
+
 }
