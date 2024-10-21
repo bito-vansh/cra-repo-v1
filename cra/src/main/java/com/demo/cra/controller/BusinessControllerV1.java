@@ -1,7 +1,10 @@
 package com.demo.cra.controller;
 
+import com.demo.cra.dto.ResponseDtoV1;
+import com.demo.cra.dto.UserDtoV1;
 import com.demo.cra.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,6 +82,21 @@ public class BusinessControllerV1 {
         } else {
             return "Number is odd";
         }
+
+    }
+
+    /**
+     * Creates a new user by processing the provided user data.
+     * This endpoint handles POST requests to create a user, validates the input,
+     * saves the user information, and returns an appropriate response.
+     */
+    @PostMapping(value = "/create/user")
+    public ResponseEntity<?> createUser(
+            @RequestBody UserDtoV1 userDto
+    ) {
+
+        ResponseDtoV1<?> responseDto = businessService.saveUserInfo(userDto);
+        return new ResponseEntity<>(responseDto, responseDto.getHttpStatus());
 
     }
 
